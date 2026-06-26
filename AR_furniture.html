@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Furniture | Premium Luxury Manufacturing</title>
+    <!-- Fonts & Icon Packs -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- DESIGN SYSTEM COLORS & THEME --- */
+        :root {
+            --primary-gold: #D4AF37;
+            --light-gold: #F3E5AB;
+            --dark-gold: #AA7C11;
+            --bg-dark: #0A0A0A;
+            --bg-surface: #121212;
+            --bg-card: #1A1A1A;
+            --text-light: #FFFFFF;
+            --text-muted: #A0A0A0;
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* --- GLOBAL RESETS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, .brand-logo {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--primary-gold);
+            margin: 20px auto 0;
+        }
+
+        .gold-text {
+            color: var(--primary-gold);
+            background: linear-gradient(45deg, var(--primary-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-gold {
+            display: inline-block;
+            padding: 14px 36px;
+            border: 1px solid var(--primary-gold);
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            background: transparent;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--primary-gold);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn-gold:hover::before {
+            width: 100%;
+        }
+
+        .btn-gold:hover {
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* --- SMOOTH SCROLL REVEAL ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            cursor: pointer;
+        }
+
+        /* --- 1. HERO SECTION --- */
+        #hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* --- 2. ABOUT COMPANY --- */
+        #about {
+            background-color: var(--bg-surface);
+        }
+
+        .about-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border: 1px solid var(--primary-gold);
+            padding: 12px;
+            background: var(--bg-card);
+        }
+
+        /* --- 3. OWNER PROFILE SECTION --- */
+        #owner {
+            background-color: var(--bg-dark);
+        }
+
+        .owner-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .owner-frame {
+            border: 1px solid var(--primary-gold);
+            padding: 15px;
+            background: var(--bg-card);
+            margin-bottom: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            display: inline-block;
+        }
+
+        /* Custom constraints for the requested layout */
+        .owner-frame img {
+            width: 300px;
+            height: auto;
+            display: block;
+        }
+
+        .owner-details h3 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        .owner-title {
+            color: var(--primary-gold);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        .owner-statement {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 35px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .owner-meta-info {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            padding-top: 25px;
+            width: 100%;
+        }
+
+        .owner-meta-info span {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .owner-meta-info i {
+            color: var(--primary-gold);
+            margin-right: 10px;
+        }
+
+        /* --- 4. FURNITURE GALLERY --- */
+        #gallery {
+            background-color: var(--bg-surface);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-card {
+            position: relative;
+            overflow: hidden;
+            height: 320px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-card:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            color: var(--primary-gold);
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* --- 5. PRODUCTS --- */
+        #products {
+            background-color: var(--bg-dark);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.05);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            border-color: var(--primary-gold);
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-details {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .product-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .product-details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .product-tag {
+            color: var(--primary-gold);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        /* --- 6. SERVICES --- */
+        #services {
+            background-color: var(--bg-surface);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 50px 30px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.05);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-gold);
+            background: #202020;
+        }
+
+        .service-icon {
+            font-size: 2.8rem;
+            color: var(--primary-gold);
+            margin-bottom: 25px;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- 7. TESTIMONIALS --- */
+        #testimonials {
+            background-color: var(--bg-dark);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-surface);
+            padding: 45px;
+            border-top: 2px solid var(--primary-gold);
+            position: relative;
+        }
+
+        .quote-mark {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 2.5rem;
+            color: rgba(212, 175, 55, 0.1);
+        }
+
+        .testimonial-quote {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .client-profile h4 {
+            color: var(--primary-gold);
+            margin-bottom: 3px;
+        }
+
+        .client-profile span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- 8. CONTACT DETAILS --- */
+        #contact {
+            background-color: var(--bg-surface);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+        }
+
+        .contact-panel h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-panel p {
+            color: var(--text-muted);
+            margin-bottom: 45px;
+        }
+
+        .info-block {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-icon {
+            width: 55px;
+            height: 55px;
+            border: 1px solid var(--primary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-gold);
+            font-size: 1.3rem;
+            background: var(--bg-card);
+        }
+
+        .info-text h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .info-text p {
+            margin-bottom: 0;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .contact-form-container {
+            background: var(--bg-card);
+            padding: 45px;
+            border: 1px solid rgba(212, 175, 55, 0.05);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            background: var(--bg-dark);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            color: var(--text-light);
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+        }
+
+        /* --- 9. FOOTER --- */
+        footer {
+            background-color: var(--bg-dark);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .footer-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .footer-social-links a {
+            color: var(--text-muted);
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .footer-social-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            padding-top: 25px;
+        }
+
+        /* --- COMPREHENSIVE RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 992px) {
+            .about-wrapper, .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 60px;
+                transition: var(--transition);
+                gap: 35px;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION HEADER -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="brand-logo">AR <span class="gold-text">FURNITURE</span></a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#owner">The Founder</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section id="hero">
+        <div class="container hero-content">
+            <h1 class="reveal">Exceptional Artistry <br><span class="gold-text">Premium Living</span></h1>
+            <p class="reveal">Precision-crafted modern Indian manufacturing tailored for high-end residential and commercial architectural structures.</p>
+            <a href="#products" class="btn-gold reveal">Explore Collections</a>
+        </div>
+    </section>
+
+    <!-- 2. ABOUT COMPANY -->
+    <section id="about" class="section-padding">
+        <div class="container about-wrapper">
+            <div class="about-text reveal">
+                <h2 class="gold-text">Bespoke Lineage</h2>
+                <h3>Redefining Structural Aesthetics</h3>
+                <p>Rooted in modern Indian manufacturing perfection, AR Furniture builds statements of timeless architectural luxury. We synthesize advanced heavy machinery production with precision craftsmanship workflows to engineer structural masterpiece fixtures.</p>
+                <p>Every assignment honors materials, handling premium wood compositions and premium structural accents to enrich modern corporate workspaces and luxury living systems globally.</p>
+                <a href="#contact" class="btn-gold" style="margin-top: 15px;">Initiate Project</a>
+            </div>
+            <div class="about-img reveal">
+                <img src="https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?auto=format&fit=crop&w=800&q=80" alt="AR Luxury Production Studio">
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. OWNER PROFILE SECTION -->
+    <section id="owner" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Executive Vision</h2>
+            <div class="owner-wrapper reveal">
+                <div class="owner-frame">
+                    <!-- EXACT USER REQUESTED CODE INSERTED BELOW -->
+                    <img src ="./profile.jpg" alt="Abdul Rahuman " width="300">
+                </div>
+                <div class="owner-details">
+                    <h3>Abdul Rahuman</h3>
+                    <p class="owner-title">Founder and Managing Director</p>
+                    <p class="owner-statement">"Luxury production demands meticulous engineering discipline. At AR Furniture, we prioritize micro-precision balances across all components—ensuring structural integrity transforms completely into custom architectural grandeur."</p>
+                    <div class="owner-meta-info">
+                        <span><i class="fas fa-phone-alt"></i> +25 xxxxxxx xx</span>
+                        <span><i class="fas fa-envelope"></i> abdulrahuman@gmail.com</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Namanve, Uganda</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FURNITURE GALLERY -->
+    <section id="gallery" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">The Curated Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-card reveal">
+                    <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=600&q=80" alt="Bespoke Bedding Layout">
+                    <div class="gallery-overlay">
+                        <h4>Royal Suites</h4>
+                        <p>Architectural Bedding Frameworks</p>
+                    </div>
+                </div>
+                <div class="gallery-card reveal">
+                    <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80" alt="Minimal Lounge Setup">
+                    <div class="gallery-overlay">
+                        <h4>Minimalist Lounges</h4>
+                        <p>Plush Sculptural Seating Configurations</p>
+                    </div>
+                </div>
+                <div class="gallery-card reveal">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80" alt="Antechamber Finishes">
+                    <div class="gallery-overlay">
+                        <h4>Antechambers</h4>
+                        <p>Symmetric Handcrafted Layouts</p>
+                    </div>
+                </div>
+                <div class="gallery-card reveal">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80" alt="Grand Dining Spaces">
+                    <div class="gallery-overlay">
+                        <h4>Grand Dining</h4>
+                        <p>Polished Hardwood Exhibition Layouts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PRODUCTS -->
+    <section id="products" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Signature Collections</h2>
+            <div class="product-grid">
+                <div class="product-card reveal">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80" alt="The Aurum Sofa">
+                    </div>
+                    <div class="product-details">
+                        <h3>The Aurum Sofa</h3>
+                        <p>Bespoke modular framework accentuated with deep-set velvet profiles and leafed brass structural support tracks.</p>
+                        <span class="product-tag">Premium Grade</span>
+                    </div>
+                </div>
+                <div class="product-card reveal">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80" alt="Imperial Accent Chair">
+                    </div>
+                    <div class="product-details">
+                        <h3>Imperial Lounge Chair</h3>
+                        <p>Ergonomically sound geometric silhouette lined with custom high-resilience memory matrices.</p>
+                        <span class="product-tag">Bespoke Finish</span>
+                    </div>
+                </div>
+                <div class="product-card reveal">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&w=600&q=80" alt="Obsidian Executive Table">
+                    </div>
+                    <div class="product-details">
+                        <h3>Veneer Executive Desk</h3>
+                        <p>Premium dark teakwood configured with integrated hidden management architectures for boardrooms.</p>
+                        <span class="product-tag">Custom Commission</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SERVICES -->
+    <section id="services" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Industrial Capabilities</h2>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3>Bespoke Configuration</h3>
+                    <p>Tailor-made blueprint development engineered meticulously from architect schematic design vectors.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-gem"></i></div>
+                    <h3>Luxury Fabrication</h3>
+                    <p>Rigorous materials management and luxury machining supervised directly by elite Indian production units.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-truck-loading"></i></div>
+                    <h3>White-Glove Logistics</h3>
+                    <p>Fully managed global industrial logistics pipelines routing setups directly to your real estate venue.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. TESTIMONIALS -->
+    <section id="testimonials" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Patron Evaluations</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card reveal">
+                    <i class="fas fa-quote-right q-icon quote-mark"></i>
+                    <p class="testimonial-quote">"AR Furniture handled the full structural seating specifications for our luxury boutique offices. The material selection, alignment, and modern dark accents are stellar."</p>
+                    <div class="client-profile">
+                        <h4>Devendra S.</h4>
+                        <span>Real Estate Director</span>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <i class="fas fa-quote-right q-icon quote-mark"></i>
+                    <p class="testimonial-quote">"The bespoke board tables deployed by Abdul Rahuman's manufacturing enterprise represent masterclasses in furniture engineering. Truly exquisite work."</p>
+                    <div class="client-profile">
+                        <h4>Marcella A.</h4>
+                        <span>Senior Commercial Architect</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. CONTACT DETAILS -->
+    <section id="contact" class="section-padding">
+        <div class="container contact-wrapper">
+            <div class="contact-panel reveal">
+                <h2 class="gold-text">Inquire Privately</h2>
+                <h3>Begin Architectural Consulting</h3>
+                <p>Initiate a dialog with our project planners regarding wholesale corporate volumes, premium luxury selections, and spatial fitment programs.</p>
+                
+                <div class="info-block">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text">
+                        <h4>Corporate Hub</h4>
+                        <p>Namanve, Uganda</p>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="info-text">
+                        <h4>Direct Concierge Email</h4>
+                        <p>abdulrahuman@gmail.com</p>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="info-text">
+                        <h4>Global Telephony Inquiries</h4>
+                        <p>+25 xxxxxxx xx</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container reveal">
+                <form id="contactForm" onsubmit="event.preventDefault(); alert('Consultation file dispatched successfully. Our luxury coordination unit will connect shortly.');">
+                    <div class="input-group">
+                        <input type="text" class="input-field" placeholder="YOUR NAME" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" class="input-field" placeholder="YOUR EMAIL ADDRESS" required>
+                    </div>
+                    <div class="input-group">
+                        <textarea class="input-field" rows="5" placeholder="SPECIFY PROJECT PARAMETERS" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-gold" style="width: 100%;">Dispatch Structural Brief</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER -->
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo brand-logo">AR <span class="gold-text">FURNITURE</span></a>
+            <div class="footer-social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 AR Furniture Manufacturing. Crafted With Absolute Perfection. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS & INTERSECTION ANIMATIONS -->
+    <script>
+        // Mobile Responsive Navigation Functionality
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navigationLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navigationLinks.classList.toggle('active');
+            mobileMenu.querySelector('i').classList.toggle('fa-bars');
+            mobileMenu.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Autoclose slideout menu upon link navigation
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navigationLinks.classList.remove('active');
+                mobileMenu.querySelector('i').classList.add('fa-bars');
+                mobileMenu.querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // High Performance Scroll Animations Engine
+        function handleScrollReveal() {
+            const dynamicReveals = document.querySelectorAll('.reveal');
+            const visualThreshold = 100;
+            const contextHeight = window.innerHeight;
+
+            dynamicReveals.forEach(element => {
+                const elementTopBound = element.getBoundingClientRect().top;
+
+                if (elementTopBound < contextHeight - visualThreshold) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Event hooks for seamless viewport tracking
+        window.addEventListener('scroll', handleScrollReveal);
+        window.addEventListener('load', handleScrollReveal);
+    </script>
+</body>
+</html>
